@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Shopping Cart</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+    </tr>
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item.product_name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.subtotal }}</td>
+        <td>
+            <a href="/cart/remove/{{ item.id }}">Remove</a>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="3"></td>
+        <td>Total: {{ cart_total }}</td>
+        <td>
+            <a href="/cart/checkout">Checkout</a>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

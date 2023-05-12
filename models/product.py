@@ -1,11 +1,13 @@
 from db.db import sql
 
 def all_products():
-    return sql('SELECT * FROM prodcuts ORDER BY id')
+    return sql('SELECT * FROM products ORDER BY id')
 
-def get_product(id):
-    products = sql("SELECT * FROM prodcuts WHERE id = %s", [id])
-    return products[0]
+def get_product(product_id):
+    product = sql('SELECT * FROM products WHERE id = %s', [product_id])
+    return product[0] if product else None
 
-  
-            
+def search_products(search_query):
+    search_query = '%' + search_query + '%'
+    products = sql('SELECT * FROM products WHERE name ILIKE %s', [search_query])
+    return products

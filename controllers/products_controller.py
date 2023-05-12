@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect
-from models.product import all_products, get_product
+from models.product import all_products, get_product, search_products
 from services.session_info import current_user
 
 
@@ -7,30 +7,12 @@ def index():
     products = all_products()
     return render_template('products/index.html', products=products, current_user=current_user)
 
-def view():
-    view_product = get_product()
-    return render_template('products/new.html')
+def search():
+    search_query = request.args.get('q')
+    products = search_products(search_query)
+    return render_template('products/search_results.html', products=products, current_user=current_user)
 
-def create():
-    name = request.form.get('name')
-    description = request.form.get('description')
-    price = float(request.form.get('price'))
-    quantity = int(request.form.get('quantity'))
-    create_product(name, description, price, quantity)
-    return redirect('/')
+def view(product_id):
+    view_product = get_product(product_id)
+    return render_template('products/product.html', view_product=view_product)
 
-def edit(id):
-    product = get_product(id)
-    return render_template('products/edit.html', product=product)
-
-def update(id):
-    name = request.form.get('name')
-    description = request.form.get('description')
-    price = float(request.form.get('price'))
-    quantity = int(request.form.get('quantity'))
-    update_product(id, name, description, price, quantity)
-    return redirect('/')
-
-def delete(id):
-    delete_product(id)
-    return redirect('/')
