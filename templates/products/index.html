@@ -1,37 +1,18 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>Food Truck</h1>
-{% if current_user() %}
-<h3>Welcome to the Food Truck {{ current_user()['first_name']}}</h3>
-<section class="controls">
-  <form action="/sessions/delete" method="POST">
-    <button>Log Out</button>
-  </form>
-</section>
-<a href="/foods/new">Add food item</a>
-
-<section class="foods">
-  {% for food in foods: %}
-  <section class="food">
-    <header>
-      <h2>{{ food['name'] }}</h2>
-
-      <section class="controls">
-        <a href="/foods/{{ food['id'] }}/edit">Edit</a>
-
-        <form action="/foods/{{ food['id'] }}/delete" method="POST">
-          <button>Delete</button>
-        </form>
-      </section>
-    </header>
-
-    <img src="{{ food['image_url'] }}" alt="">
-  </section>
-  {% endfor %}
-</section>
-{% else %}
-<a href="/users/new">Sign up</a>
-<a href="/sessions/new">Log in</a>
-{% endif %}
-{% endblock %}
+<header>
+    <h1>Welcome to Our E-commerce Store</h1>
+    <nav>
+        <ul>
+            <a href="/users/new">Sign up</a>
+            <a href="/sessions/new">Log in</a>
+        </ul>
+    </nav>
+</header>
+<main>
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for products">
+        <button type="submit">Search</button>
+    </form>
+</main>
+{% endblock %} 
