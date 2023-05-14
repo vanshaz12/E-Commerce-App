@@ -1,7 +1,7 @@
 from db.db import sql
 
 def all_products():
-    return sql('SELECT * FROM products ORDER BY id')
+    return sql('SELECT * FROM products')
 
 def get_product(product_id):
     product = sql('SELECT * FROM products WHERE id = %s', [product_id])

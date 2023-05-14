@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <header>
     <h1>Welcome to Our E-commerce Store</h1>
-    <nav>
-        <ul>
-            <a href="/users/new">Sign up</a>
-            <a href="/sessions/new">Log in</a>
-        </ul>
-    </nav>
+
 </header>
-<main>
-    <form action="/search" method="GET">
-        <input type="text" name="query" placeholder="Search for products">
-        <button type="submit">Search</button>
+
+{% if current_user() %}
+<h2>Welcome {{ current_user()['first_name'] }}</h2>
+<section class="controls">
+    <form action="/sessions/delete" method="POST">
+      <button>Log Out</button>
     </form>
-</main>
-{% endblock %} 
+  </section>
+    <main>
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search for products">
+            <button type="submit">Search</button>
+        </form>
+    </main>
+
+{% else %}
+<a href="/users/new">Sign up</a>
+<a href="/sessions/new">Log in</a>
+{% endif %}
+
+{% endblock %}
+

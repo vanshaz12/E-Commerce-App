@@ -7,12 +7,11 @@ def create_user(first_name, last_name, email, password):
 
 
 def find_user_by_email(email):
-    users = sql('SELECT * FROM users WHERE email = %s', [email])
-    if len(users) > 0:
+    users = sql("SELECT * FROM users WHERE email = %s", [email])
+    if users:
         return users[0]
-    else:
-        return None
+    return None
     
-def find_user_by_id(id):
-    users = sql('SELECT * FROM users WHERE id = %s', [id])
+def find_user_by_id(user_id):
+    users = sql('SELECT * FROM users WHERE user_id = %s', [user_id])
     return users[0]
