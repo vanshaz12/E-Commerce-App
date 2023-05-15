@@ -1,5 +1,5 @@
-from flask import render_template, request
-from models.product import all_products, get_product, search_products, view_product
+from flask import render_template, request, redirect, session
+from models.product import all_products, get_product, search_products, view_product, add_review
 from services.session_info import current_user
 
 def index():
@@ -16,6 +16,10 @@ def view(product_id):
     product = view_product(product_id)[0]
     print(product)
     return render_template('products/product.html', product=product, current_user=current_user)
+
+def review(id):
+  add_review(id, session['user_id'])
+  return redirect('/')
 
 
 

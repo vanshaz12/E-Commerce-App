@@ -17,4 +17,5 @@ def view_product(product_id):
     view_product = sql(query, [product_id])
     return view_product
 
-
+def add_review(user_id, product_id, rating, comment):
+    sql("INSERT INTO reviews (user_id, product_id, rating, comment) VALUES (%s, %s, %s, %s), RETURNING *", [user_id, product_id, rating, comment])

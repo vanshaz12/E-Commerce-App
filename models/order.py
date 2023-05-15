@@ -1,5 +1,7 @@
 from db.db import sql
 from flask import session, request, url_for, redirect
+
+
 def get_order(order_id):
     result = sql("SELECT * FROM orders WHERE order_id = %s", [order_id])
     if result:
@@ -28,11 +30,7 @@ def calculate_total_price(cart):
     
     return total_price
 
-def add_to_cart():
-    user_id = session.get('user_id')
-    product_id = request.form.get('product_id')  
-    quantity = request.form.get('quantity') 
-
+def add_to_cart(user_id, product_id, quantity):
     # Check if the user already has an existing order
     existing_order = sql('SELECT * FROM orders WHERE user_id = %s', [user_id])
     if existing_order:
@@ -44,4 +42,7 @@ def add_to_cart():
         sql('INSERT INTO orders (user_id, cart_items) VALUES (%s, jsonb_build_object(%s, %s))',
             [user_id, product_id, quantity])
 
-    return redirect(url_for('cart_routes.view_cart'))
+
+
+
+
