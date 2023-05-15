@@ -4,3 +4,7 @@ bcrypt
 python-dotenv
 requests
 gunicorn
+
+
+
+# DB_URL = os.environ.get('PGPASSWORD=GzfNU7ZyGnwN8BLxywNBe8qC77Jc4jNc psql -h dpg-ched1re7avja5m9ktlo0-a.oregon-postgres.render.com -U e_commerce_app_user e_commerce_app')

@@ -11,3 +11,10 @@ def search_products(search_query):
     search_query = '%' + search_query + '%'
     products = sql('SELECT * FROM products WHERE name ILIKE %s', [search_query])
     return products
+
+def view_product(product_id):
+    query = "SELECT * FROM products WHERE product_id = %s"
+    view_product = sql(query, [product_id])
+    return view_product
+
+
