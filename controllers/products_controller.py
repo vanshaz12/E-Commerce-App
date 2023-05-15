@@ -12,6 +12,8 @@ def search():
     return render_template('products/product_list.html', products=products, current_user=current_user)
 
 def view(product_id):
-    product = view_product(product_id)
+    product = view_product(product_id)[0]
+    print(product)
     return render_template('products/product.html', product=product, current_user=current_user)
+
 
