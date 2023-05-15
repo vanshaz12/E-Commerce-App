@@ -1,10 +1,11 @@
-from flask import render_template, redirect, request
-from models.order import get_order, update_order, delete_order
+from flask import render_template, redirect, request, session
+from models.order import get_order, update_order, delete_order, calculate_total_price, add_to_cart
+from models.product import get_product
 from services.session_info import current_user
 
 def view(order_id):
     order = get_order(order_id)
-    return render_template('order/view.html', order=order, current_user=current_user)
+    return render_template('order/cart.html', order=order, current_user=current_user)
 
 def update(order_id):
     updated_order_data = {
@@ -19,3 +20,9 @@ def update(order_id):
 def delete(order_id):
     delete_order(order_id)
     return redirect('/cart')
+
+def add(order_id):
+    add_to_cart(order_id)
+    return redirect('/')
+
+    

@@ -1,5 +1,6 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, url_for
 from models.user import find_user_by_email
+
 import bcrypt
 
 def new():
@@ -22,3 +23,4 @@ def create():
 def delete():
   session.clear() # logs the user out
   return redirect('/')
+

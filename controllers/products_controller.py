@@ -4,6 +4,7 @@ from services.session_info import current_user
 
 def index():
     products = all_products()
+    print(products)
     return render_template('products/index.html', products=products, current_user=current_user)
 
 def search():
@@ -15,5 +16,7 @@ def view(product_id):
     product = view_product(product_id)[0]
     print(product)
     return render_template('products/product.html', product=product, current_user=current_user)
+
+
 
 
