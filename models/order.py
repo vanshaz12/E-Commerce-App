@@ -1,5 +1,6 @@
 from db.db import sql
-from flask import session, request, url_for, redirect
+from flask import session, request, url_for, redirect, render_template
+from models.product import get_product
 
 
 def get_order(order_id):
@@ -30,21 +31,27 @@ def calculate_total_price(cart):
     
     return total_price
 
-def add_to_cart(user_id, product_id, quantity):
-    # Check if the user already has an existing order
-    existing_order = sql('SELECT * FROM orders WHERE user_id = %s', [user_id])
+def view_cart():
+    cart = session.get('cart', [])
+    total_price = calculate_total_price(cart)
+    return render_template('products/cart.html', cart=cart, total_price=total_price)
     
-    if len(existing_order) > 0:
-        print("in if")
-        # Update the existing order by adding the new item to the cart
-        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s)',
+def add_to_cart(user_id, product_id, quantity):
+    user_id = session.get('user_id')
+
+    # Check if the user already has an existing cart
+    existing_cart = sql('SELECT * FROM cart WHERE user_id = %s', [user_id])
+
+    if existing_cart:
+        # Update the existing cart by adding the new item
+        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s) RETURNING *',
             [user_id, product_id, quantity])
     else:
-        print("in esle")
-        user_id = session.get("user_id")
-        # Create a new order and add the item to the cart
-        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s)',
+        # Create a new cart and add the item to it
+        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s) RETURNING *',
             [user_id, product_id, quantity])
+
+    # return redirect('/')
 
 
 

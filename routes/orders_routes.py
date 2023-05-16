@@ -1,6 +1,7 @@
 from flask import Blueprint
 from controllers.orders_controller import view, update, delete, add
-from controllers.cart_controller import view_cart
+from models.order import view_cart
+
 
 orders_routes = Blueprint('orders_routes', __name__)
 

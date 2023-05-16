@@ -21,18 +21,19 @@
     
     
     <!-- Existing reviews -->
-    {% if product.reviews %}
     <h3>Reviews</h3>
-    <ul>
-        {% for review in product.reviews %}
-        <li>
-            <p>Rating: {{ review.rating }}</p>
-            <p>Comment: {{ review.comment }}</p>
-        </li>
-        {% endfor %}
-    </ul>
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <p>Rating: {{ reviews.rating }}</p>
+                    <p>Comment: {{ reviews.comment }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available.</p>
     {% endif %}
-
     <!-- Review form -->
     <h3>Add a Review</h3>
     <form action="/products/{{ product.product_id }}/reviews" method="POST">

@@ -28,7 +28,7 @@ def add(product_id):
 
     add_to_cart(user_id, product_id, quantity)  # Call the add_to_cart function to add the item to the cart
 
-    return redirect('/products/cart.html')
+    return redirect('/orders/cart')
 
 
 

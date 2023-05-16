@@ -15,9 +15,17 @@ def search_products(search_query):
 def view_product(product_id):
     query = "SELECT * FROM products WHERE product_id = %s"
     view_product = sql(query, [product_id])
+
     return view_product
+
+
 
 def add_review(user_id, product_id, rating, comment):
     sql("INSERT INTO reviews (user_id, product_id, rating, comment) VALUES (%s, %s, %s, %s) RETURNING *", [user_id, product_id, rating, comment])
 
+
+def get_reviews_by_product_id(product_id):
+    query = "SELECT * FROM reviews WHERE product_id = %s"
+    reviews = sql(query, [product_id])
+    return reviews
 
