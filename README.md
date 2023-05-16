@@ -4,7 +4,7 @@ Welcome to the E-Commerce App project! This is a simple implementation of an e-c
 
 ## Live Project
 
-You can access the live project by clicking [here](https://example.com).
+You can access the live project by clicking [here](https://e-commerce-app-pxq6.onrender.com).
 
 ## About
 
