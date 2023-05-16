@@ -35,15 +35,16 @@
 
     <!-- Review form -->
     <h3>Add a Review</h3>
-    <form action="/products/{{ product[product_id] }}/reviews" method="POST"> 
+    <form action="/products/{{ product.product_id }}/reviews" method="POST">
         <label for="rating">Rating:</label>
         <input type="number" name="rating" min="1" max="5" required>
-
+    
         <label for="comment">Comment:</label>
         <textarea name="comment" rows="3" required></textarea>
-
+    
         <button type="submit">Submit Review</button>
     </form>
+    
 </main>
 
 
