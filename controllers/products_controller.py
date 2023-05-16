@@ -17,10 +17,12 @@ def view(product_id):
     print(product)
     return render_template('products/product.html', product=product, current_user=current_user)
 
-def review(id):
-  add_review(id, session['user_id'])
-  return redirect('/')
-
+def review(product_id):
+    rating = request.form.get('rating')
+    comment = request.form.get('comment')
+    user_id = session['user_id']
+    add_review(user_id, product_id, rating, comment)
+    return redirect('/')
 
 
 

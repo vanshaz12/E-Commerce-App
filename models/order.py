@@ -33,14 +33,20 @@ def calculate_total_price(cart):
 def add_to_cart(user_id, product_id, quantity):
     # Check if the user already has an existing order
     existing_order = sql('SELECT * FROM orders WHERE user_id = %s', [user_id])
-    if existing_order:
-        # Update the existing order by adding the new item
-        sql('UPDATE orders SET cart_items = jsonb_set(cart_items, \'{{%s}}\', \'%s\', true) WHERE user_id = %s',
-            [product_id, quantity, user_id])
-    else:
-        # Create a new order with the new item
-        sql('INSERT INTO orders (user_id, cart_items) VALUES (%s, jsonb_build_object(%s, %s))',
+    
+    if len(existing_order) > 0:
+        print("in if")
+        # Update the existing order by adding the new item to the cart
+        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s)',
             [user_id, product_id, quantity])
+    else:
+        print("in esle")
+        user_id = session.get("user_id")
+        # Create a new order and add the item to the cart
+        sql('INSERT INTO cart (user_id, product_id, quantity) VALUES (%s, %s, %s)',
+            [user_id, product_id, quantity])
+
+
 
 
 

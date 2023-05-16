@@ -22,8 +22,15 @@ CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     user_id REFERENCES users (user_id),
     total_amount INTEGER,
-    cart_items JSONB
 );
+ 
+CREATE TABLE cart (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users (user_id),
+    product_id INT REFERENCES products (product_id),
+    quantity INT
+);
+
 
 
 

@@ -24,6 +24,7 @@ def delete(order_id):
 def add(product_id):
     user_id = session.get('user_id')
     quantity = request.form.get('quantity') 
+    print(f'here is {product_id} and {user_id} and {quantity}')
 
     add_to_cart(user_id, product_id, quantity)  # Call the add_to_cart function to add the item to the cart
 
